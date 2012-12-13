@@ -30,7 +30,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "json"
   gem.add_dependency "json_pure"
-  gem.add_dependency "standalone_migrations"
+  #gem.add_dependency "standalone_migrations"
   gem.add_dependency "trollop" # This implements the help system
 
   gem.add_development_dependency "turnip"
