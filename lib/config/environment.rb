@@ -1,9 +1,7 @@
 # encoding: UTF-8
 
 # Application wide requirements
-require 'active_record'
-require 'active_model'
-require 'active_support'
+require 'sequel'
 require 'multi_json'
 
 case RUBY_PLATFORM
@@ -33,7 +31,7 @@ ENV['RAILS_ENV'] ||= 'development'
 
 # Load the db config and create a connectoid. Make an ivar so its shared throughout the application
 if ENV['RAILS_ENV'] == 'test' then
-  ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: ':memory:'
+  @DB = Sequel.sqlite
   puts "NOTICE: Loading db schema to IN-MEMORY SQLite3 db"
   load "#{File.join(File.dirname(__FILE__), '../../db/schema.rb')}"
 else
@@ -41,7 +39,7 @@ else
   @dbconfig = YAML::load(ERB.new(IO.read(File.expand_path('../../../db/config.yml', __FILE__))).result)[ENV['RAILS_ENV']]
   # Establish the database connection
   puts "NOTICE: Loading db schema to ON-DISK SQLite3 db"
-  ActiveRecord::Base.establish_connection(@dbconfig) # Line that actually connects the db.
+  @DB = Sequel.connect(@dbconfig) # Line that actually connects the db.
 end
 
 # Load all the models

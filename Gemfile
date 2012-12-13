@@ -21,7 +21,7 @@ group :development do
 end
 
 platforms :jruby do
-  gem "activerecord-jdbcsqlite3-adapter"
+  #gem "activerecord-jdbcsqlite3-adapter"
   gem 'jruby-openssl'
   gem "jdbc-sqlite3"
 end

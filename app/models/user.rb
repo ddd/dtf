@@ -1,14 +1,11 @@
-# encoding: UTF-8
+class User < Sequel::Model
 
-# User class owns all Verification Suites in the DTF system
-class User < ActiveRecord::Base
+  # has_and_belongs_to_many :verification_suites
+  # has_many :analysis_cases, :through => :verification_suites
+  # has_many :case_tests, :through => :verification_suites
 
-  attr_accessible :full_name, :email_address, :user_name
-  validates :full_name, :email_address, :user_name, :presence => true
-  validates :user_name, :email_address, :uniqueness => true
-
-  has_many :verification_suites, :include => :analysis_cases, :include => :case_tests, :dependent => :destroy
-  has_many :analysis_cases, :through => :verification_suites, :include => :case_tests, :dependent => :destroy
-  has_many :case_tests, :through => :verification_suites, :include => :analysis_cases, :dependent => :destroy
+  one_to_many :verification_suites
+  many_to_many :analysis_cases, :join_table=>users_verification_suites
+  many_to_many :case_tests, :join_table=>users_verification_suites
 
 end

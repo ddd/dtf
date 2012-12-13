@@ -1,15 +1,10 @@
-# encoding: UTF-8
+class AnalysisCase < Sequel::Model
 
-# AnalysisCase defines the 'test premise', which is broken down into steps called CaseTests
-#
-# AnalysisCases own CaseTests. Users own each CaseTest through its AnalysisCase
-class AnalysisCase < ActiveRecord::Base
+  # has_many    :users, :through => :verification_suite
+  # belongs_to  :verification_suite
+  # has_many :case_tests
 
-  attr_accessible :name, :description
-  validates_presence_of :name, :description
-
-  belongs_to  :verification_suite, :autosave => :true
-  belongs_to  :user, :autosave => :true
-  has_many :case_tests, :include => :verification_suites, :dependent => :destroy
-
+  one_to_many   :users, :join_table=>users_verification_suites
+  many_to_one   :verification_suite
+  many_to_many  :case_tests
 end

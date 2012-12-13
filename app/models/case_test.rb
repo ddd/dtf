@@ -1,11 +1,10 @@
-# encoding: UTF-8
+class CaseTest < Sequel::Model
 
-# CaseTest is the recording of each individual step of an AnalysisCase's 'test premise'
-class CaseTest < ActiveRecord::Base
+  # has_many    :users, :through => :verification_suite
+  # has_one     :verification_suite, :through => :analysis_case
+  # belongs_to  :analysis_case
 
-  attr_accessible :description, :cmd
-  validates_presence_of :description, :cmd
-
-  belongs_to  :analysis_case, :autosave => :true
-  has_one     :verification_suite, :through => :analysis_case, :include => :verification_suites, :autosave => :true
+  one_to_many   :users, :join_table=>users_verification_suites
+  one_to_one    :verification_suite  # This is the one that confuses me because its through AC not VS
+  many_to_one   :analysis_case
 end
