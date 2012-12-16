@@ -15,8 +15,8 @@ class VerificationSuite < Sequel::Model
   # has_many :case_tests, :through => :analysis_cases
 
   one_to_many  :users
-  many_to_many :analysis_cases, :join_table=>users_verification_suites
-  many_to_many :case_tests, :join_table=>users_verification_suites # This is the one that confuses me because its through AC not VS
+  many_to_many :analysis_cases, :join_table => :users_verification_suites
+  many_to_many :case_tests, :join_table => :users_verification_suites # This is the one that confuses me because its through AC not VS
 
 
 end

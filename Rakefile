@@ -2,21 +2,15 @@
 # encoding: UTF-8
 
 require "bundler/gem_tasks"
+require 'erb'
+require 'yaml'
+require 'sequel'
+require 'jdbc/sqlite3'
+require 'java'
+require 'tasks/sequel'
 
-begin
-  require 'tasks/standalone_migrations'
-rescue LoadError => e
-  puts "gem install standalone_migrations to get db:migrate:* tasks! (Error: #{e})"
-end
-
-namespace :cover_me do
-
-  desc "Generates and opens code coverage report."
-  task :report do
-    require 'cover_me'
-    CoverMe.complete!
-  end
-
+task :environment do
+  DB = Sequel.connect('jdbc:sqlite:db/dtf-sequel.sqlite3')
 end
 
 task :test do

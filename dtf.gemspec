@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "thor"
   gem.add_dependency "rake"
   gem.add_dependency "sequel"
+  gem.add_dependency "sequel_plus"
 
   gem.add_dependency "sqlite3" if RUBY_PLATFORM == "ruby"
 
