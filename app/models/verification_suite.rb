@@ -14,9 +14,10 @@ class VerificationSuite < Sequel::Model
   # has_many :analysis_cases
   # has_many :case_tests, :through => :analysis_cases
 
-  one_to_many  :users
-  many_to_many :analysis_cases, :join_table => :users_verification_suites
-  many_to_many :case_tests, :join_table => :users_verification_suites # This is the one that confuses me because its through AC not VS
+  plugin :many_through_many
 
+  one_to_many  :analysis_cases
+
+  many_through_many :case_tests, [[:analysis_cases, :id, :id], [:analysis_cases, :verification_suite_id, :id]], :left_primary_key=>:verification_suite_id
 
 end

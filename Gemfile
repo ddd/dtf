@@ -8,16 +8,14 @@ group :development do
   #gem "method_source", :git => "https://github.com/banister/method_source.git"
   gem 'pry'
   gem 'pry-doc'
-  gem "pry-git"
-  gem "pry-developer_tools"
   gem "pry-syntax-hacks"
   gem "pry-editline"
   gem "pry-highlight"
   gem "pry-buffers"
   gem "jist"
   gem "pry-theme"
-  gem 'simplecov'
   gem 'database_cleaner'
+  gem 'multi_json'
 end
 
 platforms :jruby do

@@ -1,7 +1,7 @@
 Sequel.migration do
   up do
     create_table(:verification_suites) do
-      primary_id  :id
+      primary_key  :id
       String      :name
       String      :description
       DateTime    :created_at
